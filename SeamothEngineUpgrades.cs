@@ -625,9 +625,9 @@ namespace SeamothEngineUpgrades  // Name of the mod.
 
                             // prompt for gear changes
                             stringBuilder.Append("Gear up ");
-                            stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.GearUpKeybindValue.ToString());
+                            stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.GearUpKeybindValue.ToString());                            
                             stringBuilder.Append(" down ");
-                            stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.GearDownKeybindValue.ToString());
+                            stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.GearDownKeybindValue.ToString());                            
                             stringBuilder.Append('\n');
 
                             //prompt for health and power info cycle
