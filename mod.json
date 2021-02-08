@@ -1,0 +1,15 @@
+{
+  "Id": "SeamothEngineUpgrades",
+  "DisplayName": "Seamoth Engine Upgrades",
+  "Author": "Mimes",
+  "Version": "0.0.4",
+  "Requires": [],
+  "LoadAfter": [],
+  "AssemblyName": "SeamothEngineUpgrades.dll",
+  "EntryMethod": "SeamothEngineUpgrades.MainPatcher.Patch",
+  "Config": {},
+  "Dependencies": [
+    "SMLHelper"
+  ],
+  "Enable": true
+}

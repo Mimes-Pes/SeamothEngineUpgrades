@@ -13,6 +13,8 @@ namespace SeamothEngineUpgrades     // Line matching mod name.
         private static string ModPath = Path.GetDirectoryName(thisAssembly.Location);
         internal static string AssetsFolder = Path.Combine(ModPath, "Assets");
 
+        public static string _AssetName => "SeamothEngineUpgradesAsset";
+
         public static void Patch()
         {
             var harmony = HarmonyInstance.Create("com.mimes.subnautica.seamothengineupgrades");   // Name to match mod.

@@ -60,6 +60,10 @@
     <Reference Include="UnityEngine">
       <HintPath>D:\Games\Subnautica 65786\Subnautica_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Steam\steamapps\common\Subnautica\Subnautica_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>D:\Games\Subnautica 65786\Subnautica_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
@@ -77,9 +81,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="InGame\SeamothEngineUiManager.cs" />
+    <Compile Include="Object\GearInfo.cs" />
     <Compile Include="MainPatcher.cs" />
-    <Compile Include="SeamothEngineUpgrades.cs" />
+    <Compile Include="Config\Options.cs" />
+    <Compile Include="Patch\Player_Update_Patch.cs" />
+    <Compile Include="Object\SeamothEngineUpgrades.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Object\SeamothInfo.cs" />
+    <Compile Include="Patch\SeaMoth_Update_Patch.cs" />
+    <Compile Include="Patch\uGUI_SeamothHUD_Update_Patch.cs" />
+    <Compile Include="Patch\Vehicle_ConsumeEngineEnergy_Patch.cs" />
+    <Compile Include="Patch\Vehicle_Update_Patch.cs" />
+    <Compile Include="Utils\GameObjectFinder.cs" />
+    <Compile Include="Utils\Helper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\SeamothEngineUpgradesModule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mod.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetPath)" "D:\Steam\steamapps\common\Subnautica\QMods\$(ProjectName)\" /y
+xcopy "$(ProjectDir)mod.json" "D:\Steam\steamapps\common\Subnautica\QMods\$(ProjectName)\" /y
+xcopy "$(ProjectDir)Assets\seamothengineupgradesasset" "D:\Steam\steamapps\common\Subnautica\QMods\$(ProjectName)\Assets\" /y
+xcopy "$(ProjectDir)Assets\seamothengineupgradesasset.manifest" "D:\Steam\steamapps\common\Subnautica\QMods\$(ProjectName)\Assets\" /y</PostBuildEvent>
+  </PropertyGroup>
 </Project>
