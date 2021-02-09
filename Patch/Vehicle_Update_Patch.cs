@@ -1,4 +1,5 @@
 ﻿using Harmony;
+using SeamothEngineUpgrades.InGame;
 using UnityEngine;
 
 
@@ -14,40 +15,6 @@ namespace SeamothEngineUpgrades  // Name of the mod.
     [HarmonyPatch("Update")]        // The Vehicle class's Update method.
     internal class Vehicle_Update_Patch
     {
-
-        // ######################################################################
-        // Helper methods
-        // ######################################################################
-
-        public static void applyGearSpeed()
-        {
-        }
-
-        // not called or tested yet - changes energy every 1 second
-        private static void AdjustEnergyConsumption(Vehicle thisSeaMoth, float thisAmount)
-        {
-            EnergyMixin thisEnergyMixing = thisSeaMoth.GetComponent<EnergyMixin>();
-
-            bool flag = GearInfo.nextEnergyConsumption == null;
-            if (flag)
-            {
-                GearInfo.nextEnergyConsumption = new float?(Time.time + 1f);
-            }
-            bool flag2 = Time.time < GearInfo.nextEnergyConsumption.Value + 1f;
-            if (!flag2)
-            {
-                //EnergyMixin energyMixin = GearInfo.GetEnergyMixin();
-                bool flag3 = thisEnergyMixing == null;
-                if (!flag3)
-                {
-                    thisEnergyMixing.ConsumeEnergy(thisAmount);
-                    GearInfo.nextEnergyConsumption = new float?(Time.time + 1f);
-                }
-            }
-        }
-
-
-
         // ######################################################################
         // Patch - set speed
         // ######################################################################
@@ -71,10 +38,11 @@ namespace SeamothEngineUpgrades  // Name of the mod.
             {
                 bool upgradeLoaded = thisSeamoth.modules.GetCount(Modules.SeamothEngineUpgradesModule.TechTypeID) > 0;
                 bool efficiencyLoaded = thisSeamoth.modules.GetCount(TechType.VehiclePowerUpgradeModule) > 0;
-                bool playerPiloting = Player.main.GetMode() == Player.Mode.LockedPiloting;               
+                bool playerPiloting = Player.main.GetMode() == Player.Mode.LockedPiloting;
 
                 if (upgradeLoaded && playerPiloting)
                 {
+                    SeamothEngineUiManager.ShowUI(true);
                     if (Config.SeamothGearValue == 1f)
                     {
                         if (SeamothInfo.lastSeamothGearValue != 1f)
@@ -141,6 +109,7 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                 } // end if (upgradeLoaded && playerPiloting)
                 else
                 {
+                    SeamothEngineUiManager.ShowUI(false);
                     if (SeamothInfo.lastSeamothGearValue != 0f)
                     {
                         thisSeamoth.forwardForce = forwardForce;
@@ -149,13 +118,8 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                         thisSeamoth.verticalForce = verticalForce;
                         SeamothInfo.lastSeamothGearValue = 0f;
                     }
-
-                } // end else
-
-            }//end if (main != null)
-
-        } // end public static void Postfix(Vehicle __instance)
-
-    } // end internal class Vehicle_Update_Patch
-
-} // namespace SeamothEngineUpgrades 
+                }
+            }
+        }
+    }
+}

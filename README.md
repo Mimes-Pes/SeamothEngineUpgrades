@@ -1,10 +1,13 @@
 # SeamothEngineUpgrades
 
-###It is a Seamoth piloting upgrade mod, the upgrade is unlocked with Base Upgrade Console. Making this upgrade requires
-- Computer Chip,
-- Advanced Wiring Kit and
-- Gold.
-###It is a mod which improves dashboard and adds gears to Seamoth (approx.):
+### It is a Seamoth piloting upgrade mod, the upgrade is unlocked with Base Upgrade Console. Making this upgrade requires
+| Ingridient          | Amount |
+| ------------------- |:------:|
+| Computer Chip       | 1      |
+| Advanced Wiring Kit | 1      |
+| Gold                | 1      |
+
+### It is a mod which improves dashboard and adds gears to Seamoth (approx.):
 | Gear        | forward force |
 | ----------- |:-------------:|
 | 1           | 2.5           |
@@ -14,7 +17,7 @@
 | 5           | 16.5          |
 | 6           | 20            |
 
-###Energy Use Adjustment:
+### Energy Use Adjustment:
 | Gear        | Energy  |
 | ----------- |:-------------:|
 | 1           | 0.1 of normal   |

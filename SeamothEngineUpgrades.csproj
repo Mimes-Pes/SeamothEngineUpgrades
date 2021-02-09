@@ -99,9 +99,45 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\SeamothEngineUpgradesModule.png" />
+    <Content Include="SpriteExport\Sprite\BetterVehicleInfoModule - Copy %282%29.png" />
+    <Content Include="SpriteExport\Sprite\BetterVehicleInfoModule - Copy.png" />
+    <Content Include="SpriteExport\Sprite\BetterVehicleInfoModule.png" />
+    <Content Include="SpriteExport\Sprite\cogs-gear-icon-vector-11563161480shfpdnstsu.png" />
+    <Content Include="SpriteExport\Sprite\Health-2.png" />
+    <Content Include="SpriteExport\Sprite\Health.png" />
+    <Content Include="SpriteExport\Sprite\Icon_Power.png" />
+    <Content Include="SpriteExport\Sprite\Power.png" />
+    <Content Include="SpriteExport\Sprite\PowerUpgradeIcon.png" />
+    <Content Include="SpriteExport\Sprite\powerupgrademodule.png" />
+    <Content Include="SpriteExport\Sprite\SeamothBackground.png" />
+    <Content Include="SpriteExport\Sprite\TabJournal.png" />
+    <Content Include="SpriteExport\Sprite\ThermalReactorIcon.png" />
+    <Content Include="SpriteExport\Sprite\thermometer.png" />
+    <Content Include="SpriteExport\Sprite\workbench_seamothmenu.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\cogs-3.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModule.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModule10.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModule2.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModule3.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModule5.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModule6.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModule7.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModule8.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModule9.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModuleOld.png" />
+    <Content Include="SpriteExport\Sprite\Work\2021-01-29\SeamothEngineUpgradesModuleoooo.png" />
+    <Content Include="SpriteExport\Sprite\Work\BetterVehicleInfoModule-Cogs.png" />
+    <Content Include="SpriteExport\Sprite\Work\BetterVehicleInfoModule-First.png" />
+    <Content Include="SpriteExport\Sprite\Work\BetterVehicleInfoModule-Old.png" />
+    <Content Include="SpriteExport\Sprite\Work\clipart1424375.png" />
+    <Content Include="SpriteExport\Sprite\Work\cogs-2.PNG" />
+    <Content Include="SpriteExport\Sprite\Work\cogs-3.png" />
+    <Content Include="SpriteExport\Sprite\Work\cogs.png" />
+    <Content Include="SpriteExport\Sprite\Work\SeamothEngineUpgradesModule.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mod.json" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

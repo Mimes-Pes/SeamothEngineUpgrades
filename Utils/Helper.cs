@@ -26,9 +26,14 @@ namespace SeamothEngineUpgrades.Utils
             }
         }
 
-        public static GameObject GetGameObjectFromBundle(AssetBundle bundle, string filename)
+        public static GameObject GetGameObjectFromBundle(string filename)
         {
-            return bundle.LoadAsset<GameObject>(filename);
+            return Bundle.LoadAsset<GameObject>(filename);
+        }
+
+        public static Atlas.Sprite GetSpriteFromBundle(string filename)
+        {
+            return ImageUtils.LoadSpriteFromTexture(Bundle.LoadAsset<Texture2D>(filename));
         }
     }
 }

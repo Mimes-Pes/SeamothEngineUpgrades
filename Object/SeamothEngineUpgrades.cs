@@ -2,13 +2,18 @@
 using SMLHelper.V2.Assets;
 using SMLHelper.V2.Crafting;
 using SeamothEngineUpgrades.InGame;
+using SMLHelper.V2.Utility;
+using System.IO;
 
 namespace SeamothEngineUpgrades.Modules
 {
     public class SeamothEngineUpgradesModule : Equipable
     {
+        public const string _ClassID = "SeamothEngineUpgradesModule";
+        public const string _FriendlyName = "Seamoth Engine Upgrades Module";
+        public const string _ShortDescription = "Adds Gears and enhances Health, Power and Temperature displays";
         public static TechType TechTypeID { get; protected set; }
-        public SeamothEngineUpgradesModule() : base("SeamothEngineUpgradesModule", "Seamoth Engine Upgrades Module", "Adds Gears and enhances Health, Power and Temperature displays")
+        public SeamothEngineUpgradesModule() : base(_ClassID, _FriendlyName, _ShortDescription)
         {
             OnFinishedPatching += () =>
             {
@@ -27,7 +32,7 @@ namespace SeamothEngineUpgrades.Modules
             var prefab = GameObject.Instantiate(CraftData.GetPrefabForTechType(TechType.SeamothElectricalDefense));
 
             //Add UI
-            var UIprefab = GameObject.Instantiate(Utils.Helper.Bundle.LoadAsset<GameObject>("VeichleUI.prefab"));
+            var UIprefab = GameObject.Instantiate(Utils.Helper.GetGameObjectFromBundle("VeichleUI.prefab"));
             UIprefab.AddComponent<SeamothEngineUiManager>();
 
             return prefab;
@@ -48,6 +53,10 @@ namespace SeamothEngineUpgrades.Modules
         }
         public override string AssetsFolder { get; } = MainPatcher.AssetsFolder;
 
+        protected override Atlas.Sprite GetItemSprite()
+        {
+            return Utils.Helper.GetSpriteFromBundle("SeamothEngineUpgradesModule.png");
+        }
     }
 
 }

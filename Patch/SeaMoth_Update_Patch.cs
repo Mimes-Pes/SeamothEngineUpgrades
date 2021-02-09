@@ -3,9 +3,7 @@ using Harmony;
 using UnityEngine;
 using SMLHelper.V2.Utility;
 
-
-// Main mod.
-namespace SeamothEngineUpgrades  // Name of the mod.
+namespace SeamothEngineUpgrades
 {
     // ######################################################################
     // Patch Seamoth class Update() - implement gear and player prompts changes
@@ -45,8 +43,7 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                             Config.MarchThroughHealthValue = 1f;
                             PlayerPrefs.SetFloat("MarchThroughHealthValueSlider", 1f);
                         }
-                    } // end if (KeyCodeUtils.GetKeyDown(Config.HealthKeybindValue))
-
+                    }
                     // Detect key press and set variable to cycle through power display (mu, u, %)
                     if (KeyCodeUtils.GetKeyDown(Config.PowerKeybindValue))
                     {
@@ -54,22 +51,18 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                         {
                             Config.MarchThroughPowerValue = 2f;
                             PlayerPrefs.SetFloat("MarchThroughPowerValueSlider", 2f);
-
                         }
                         else if (Config.MarchThroughPowerValue == 2)
                         {
                             Config.MarchThroughPowerValue = 3f;
                             PlayerPrefs.SetFloat("MarchThroughPowerValueSlider", 3f);
-
                         }
                         else
                         {
                             Config.MarchThroughPowerValue = 1f;
                             PlayerPrefs.SetFloat("MarchThroughPowerValueSlider", 1f);
-
                         }
-                    } // end if (KeyCodeUtils.GetKeyDown(Config.PowerKeybindValue))
-
+                    }
                     // Detect key press and set variable (march up) to set Seamoth gear
                     if (KeyCodeUtils.GetKeyDown(Config.GearUpKeybindValue))
                     {
@@ -77,33 +70,7 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                         if (gearVal > 5f) return;
                         Config.SeamothGearValue = gearVal;
                         PlayerPrefs.SetFloat("SeamothGearValueSlider", gearVal);
-                        //if (Config.SeamothGearValue == 1f)
-                        //{
-                        //    Config.SeamothGearValue = 2f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 2f);
-                        //}
-                        //else if (Config.SeamothGearValue == 2f)
-                        //{
-                        //    Config.SeamothGearValue = 3f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 3f);
-                        //}
-                        //else if (Config.SeamothGearValue == 3f)
-                        //{
-                        //    Config.SeamothGearValue = 4f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 4f);
-                        //}
-                        //else if (Config.SeamothGearValue == 4f)
-                        //{
-                        //    Config.SeamothGearValue = 5f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 5f);
-                        //}
-                        //else if (Config.SeamothGearValue == 5f)
-                        //{
-                        //    Config.SeamothGearValue = 6f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 6f);
-                        //}
-                    } // end if (KeyCodeUtils.GetKeyDown(KeyCode.LeftShift))
-
+                    }
                     // Detect key press and set variable (march down) to set Seamoth gear
                     if (KeyCodeUtils.GetKeyDown(Config.GearDownKeybindValue))
                     {
@@ -111,32 +78,7 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                         if (gearVal < 1f) return;
                         Config.SeamothGearValue = gearVal;
                         PlayerPrefs.SetFloat("SeamothGearValueSlider", gearVal);
-                        //if (Config.SeamothGearValue == 6f)
-                        //{
-                        //    Config.SeamothGearValue = 5f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 5f);
-                        //}
-                        //else if (Config.SeamothGearValue == 5f)
-                        //{
-                        //    Config.SeamothGearValue = 4f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 4f);
-                        //}
-                        //else if (Config.SeamothGearValue == 4f)
-                        //{
-                        //    Config.SeamothGearValue = 3f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 3f);
-                        //}
-                        //else if (Config.SeamothGearValue == 3f)
-                        //{
-                        //    Config.SeamothGearValue = 2f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 2f);
-                        //}
-                        //else if (Config.SeamothGearValue == 2f)
-                        //{
-                        //    Config.SeamothGearValue = 1f;
-                        //    PlayerPrefs.SetFloat("SeamothGearValueSlider", 1f);
-                        //}
-                    } // end if (KeyCodeUtils.GetKeyDown(KeyCode.LeftControl))
+                    } 
 
 
                     // setup and display key press prompts as selected in mod options
@@ -166,17 +108,10 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                             stringBuilder.Append(thisText1);
                             string result = stringBuilder.ToString();
                             HandReticle.main.SetUseTextRaw(result, thisText2);
-
-                        } // end if (Config.ShowPromptToggleValue)
-
-                    } // end if (main != null)
-
-                } // end if (upgradeLoaded)
-
-            } // end if (__instance.GetPilotingMode())
-
-        } // end public static void Postfix(SeaMoth __instance)
-
-    }// end internal class SeaMoth_Update_Patch
-
-} // namespace SeamothEngineUpgrades 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

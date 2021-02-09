@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3692457410
+CRC: 3799354245
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7a7c4a6f2eca8dd5f16d681133a5b507
+    Hash: 207f16d4c3beacc38d9440ddf85e0cfd
   TypeTreeHash:
     serializedVersion: 2
     Hash: c0a289bc39ef89ab928e298724e63d44
@@ -39,4 +39,5 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/Prefabs/VeichleUI.prefab
+- Assets/Resources/Icons/SeamothEngineUpgradesModule.png
 Dependencies: []

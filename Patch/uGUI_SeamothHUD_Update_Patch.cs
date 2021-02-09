@@ -70,13 +70,13 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                         break;
                 }
 
-                __instance.textHealth.text = textJoin;
+                //__instance.textHealth.text = textJoin;
                 SeamothEngineUiManager.SetLifeText(textJoin);
             }
             else // display as per vanilla game
             {
                 var healt = Mathf.Round(healthStatus * 100f).ToString();
-                __instance.textHealth.text = healt;
+                //__instance.textHealth.text = healt;
                 SeamothEngineUiManager.SetLifeText(healt);
             }
         }
@@ -106,13 +106,13 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                         textJoin = $"<size={Font}><color={Config.GetPowerColor(charge, capacity)}>{valueToDisplay}</color></size>";
                         break;
                 }
-                __instance.textPower.text = textJoin;
+                //__instance.textPower.text = textJoin;
                 SeamothEngineUiManager.SetEnergyText(textJoin);
             }
             else // display as per vanilla game
             {
                 var vanillapower = Mathf.RoundToInt(charge / capacity * 100f).ToString();
-                __instance.textPower.text = vanillapower;
+                //__instance.textPower.text = vanillapower;
                 SeamothEngineUiManager.SetEnergyText(vanillapower);
             }
         }

@@ -3,15 +3,8 @@ using SeamothEngineUpgrades.InGame;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-// Main mod.
-namespace SeamothEngineUpgrades  // Name of the mod.
+namespace SeamothEngineUpgrades
 {
-    // ######################################################################
-    // Patch Player class Update()
-    //
-    // ######################################################################
-
     [HarmonyPatch(typeof(Player))]  // Patch for the Player class.
     [HarmonyPatch("Update")]        // The Player class's Update method.
     internal class Player_Update_Patch
@@ -82,7 +75,7 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                         if (gameObject2 != null)
                         {
                             gameObject2.SetActive(false);
-                            SeamothEngineUiManager.ShowUI(true);
+                            SeamothEngineUiManager.ShowUI(false);
                         }
                     }
 
@@ -92,14 +85,10 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                     if (gameObject2 != null)
                     {
                         gameObject2.SetActive(false);
-                        SeamothEngineUiManager.ShowUI(true);
+                        SeamothEngineUiManager.ShowUI(false);
                     }
-                } // end else
-
-            } // end if (__instance != null)
-
-        } // end public static void Postfix(Player __instance)
-
-    } // end internal class Player_Update_Patch
-
-} // namespace SeamothEngineUpgrades 
+                }
+            }
+        }
+    }
+}

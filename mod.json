@@ -4,7 +4,7 @@
   "Author": "Mimes",
   "Version": "0.0.4",
   "Requires": [],
-  "LoadAfter": [],
+  "LoadAfter": [ "TorpedoImprovements" ],
   "AssemblyName": "SeamothEngineUpgrades.dll",
   "EntryMethod": "SeamothEngineUpgrades.MainPatcher.Patch",
   "Config": {},
