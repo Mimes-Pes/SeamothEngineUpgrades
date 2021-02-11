@@ -2,7 +2,7 @@
   "Id": "SeamothEngineUpgrades",
   "DisplayName": "Seamoth Engine Upgrades",
   "Author": "Mimes",
-  "Version": "0.0.4",
+  "Version": "0.0.5",
   "Requires": [],
   "LoadAfter": [ "TorpedoImprovements" ],
   "AssemblyName": "SeamothEngineUpgrades.dll",

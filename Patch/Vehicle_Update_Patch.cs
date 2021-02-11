@@ -1,125 +1,61 @@
 ﻿using Harmony;
 using SeamothEngineUpgrades.InGame;
-using UnityEngine;
 
-
-// Main mod.
-namespace SeamothEngineUpgrades  // Name of the mod.
+namespace SeamothEngineUpgrades
 {
-    // ######################################################################
-    // Patch Vehicle class Update()
-    //
-    // ######################################################################
-
-    [HarmonyPatch(typeof(Vehicle))]  // Patch for the Vehicle class.
-    [HarmonyPatch("Update")]        // The Vehicle class's Update method.
+    [HarmonyPatch(typeof(Vehicle))]
+    [HarmonyPatch("Update")]
     internal class Vehicle_Update_Patch
     {
-        // ######################################################################
-        // Patch - set speed
-        // ######################################################################
+        static float largeFactor = 3.5f;
+        static float smallFactor = 1.5f;
 
-        [HarmonyPostfix]      // Harmony postfix
+        static float forwardForce = 13f;
+        static float backwardForce = 5f;
+        static float sidewardForce = 11.5f;
+        static float verticalForce = 11f;
+        [HarmonyPostfix]
         public static void Postfix(Vehicle __instance)
         {
+            if (Player.main == null) return;
             // Implement energy consumption changes
-            Player main = Player.main; // player
-            Vehicle thisSeamoth = (main.GetVehicle() as SeaMoth);
+            var _seamoth = (SeaMoth)Player.main.GetVehicle();
 
-            float largeFactor = 3.5f;
-            float smallFactor = 1.5f;
-
-            float forwardForce = 13f; // (default)
-            float backwardForce = 5f; // (default)
-            float sidewardForce = 11.5f;  // (default)
-            float verticalForce = 11f;  // (default)
-
-            if (main != null && thisSeamoth != null)
+            if (_seamoth != null)
             {
-                bool upgradeLoaded = thisSeamoth.modules.GetCount(Modules.SeamothEngineUpgradesModule.TechTypeID) > 0;
-                bool efficiencyLoaded = thisSeamoth.modules.GetCount(TechType.VehiclePowerUpgradeModule) > 0;
-                bool playerPiloting = Player.main.GetMode() == Player.Mode.LockedPiloting;
-
-                if (upgradeLoaded && playerPiloting)
+                if (SeamothEngineUiManager.IsUIVisible)
                 {
-                    SeamothEngineUiManager.ShowUI(true);
-                    if (Config.SeamothGearValue == 1f)
-                    {
-                        if (SeamothInfo.lastSeamothGearValue != 1f)
-                        {
-                            thisSeamoth.forwardForce = forwardForce - (largeFactor * 3f);
-                            thisSeamoth.backwardForce = backwardForce - (smallFactor * 3f);
-                            thisSeamoth.sidewardForce = sidewardForce - (largeFactor * 3f);
-                            thisSeamoth.verticalForce = verticalForce - (largeFactor * 3f);
-                            SeamothInfo.lastSeamothGearValue = 1f;
-                        }
-                    }
-                    else if (Config.SeamothGearValue == 2f)
-                    {
-                        if (SeamothInfo.lastSeamothGearValue != 2f)
-                        {
-                            thisSeamoth.forwardForce = forwardForce - (largeFactor * 2f);
-                            thisSeamoth.backwardForce = backwardForce - (smallFactor * 2f);
-                            thisSeamoth.sidewardForce = sidewardForce - (largeFactor * 2f);
-                            thisSeamoth.verticalForce = verticalForce - (largeFactor * 2f);
-                            SeamothInfo.lastSeamothGearValue = 2f;
-                        }
-                    }
-                    else if (Config.SeamothGearValue == 3f)
-                    {
-                        if (SeamothInfo.lastSeamothGearValue != 3f)
-                        {
-                            thisSeamoth.forwardForce = forwardForce - largeFactor;
-                            thisSeamoth.backwardForce = backwardForce - smallFactor;
-                            thisSeamoth.sidewardForce = sidewardForce - largeFactor;
-                            thisSeamoth.verticalForce = verticalForce - largeFactor;
-                            SeamothInfo.lastSeamothGearValue = 3f;
-                        }
-                    }
+                    if (Config.SeamothGearValue == 1f && SeamothInfo.lastSeamothGearValue != 1f)
+                        SetGear(_seamoth, 1f, 3f, -1f);
+                    else if (Config.SeamothGearValue == 2f && SeamothInfo.lastSeamothGearValue != 2f)
+                        SetGear(_seamoth, 2f, 2f, -1f);
+                    else if (Config.SeamothGearValue == 3f && SeamothInfo.lastSeamothGearValue != 3f)
+                        SetGear(_seamoth, 3f, 1f, -1f);
                     else if (Config.SeamothGearValue == 4f && SeamothInfo.lastSeamothGearValue != 4f)
-                    {
-                        thisSeamoth.forwardForce = forwardForce;
-                        thisSeamoth.backwardForce = backwardForce;
-                        thisSeamoth.sidewardForce = sidewardForce;
-                        thisSeamoth.verticalForce = verticalForce;
-                        SeamothInfo.lastSeamothGearValue = 4f;
-                    }
-                    else if (Config.SeamothGearValue == 5f)
-                    {
-                        if (SeamothInfo.lastSeamothGearValue != 5f)
-                        {
-                            thisSeamoth.forwardForce = forwardForce + largeFactor;
-                            thisSeamoth.backwardForce = backwardForce + smallFactor;
-                            thisSeamoth.sidewardForce = sidewardForce + largeFactor;
-                            thisSeamoth.verticalForce = verticalForce + largeFactor;
-                            SeamothInfo.lastSeamothGearValue = 5f;
-                        }
-                    }
-                    else if (Config.SeamothGearValue == 6f)
-                    {
-                        if (SeamothInfo.lastSeamothGearValue != 6f)
-                        {
-                            thisSeamoth.forwardForce = forwardForce + (largeFactor * 2f);
-                            thisSeamoth.backwardForce = backwardForce + (smallFactor * 2f);
-                            thisSeamoth.sidewardForce = sidewardForce + (largeFactor * 2f);
-                            thisSeamoth.verticalForce = verticalForce + (largeFactor * 2f);
-                            SeamothInfo.lastSeamothGearValue = 6f;
-                        }
-                    }
-                } // end if (upgradeLoaded && playerPiloting)
+                        SetGear(_seamoth, 4f, 0f, 1f);
+                    else if (Config.SeamothGearValue == 5f && SeamothInfo.lastSeamothGearValue != 5f)
+                        SetGear(_seamoth, 5f, 1f, 1f);
+                    else if (Config.SeamothGearValue == 6f && SeamothInfo.lastSeamothGearValue != 6f)
+                        SetGear(_seamoth, 6f, 2f, 1f);
+
+                }
                 else
                 {
-                    SeamothEngineUiManager.ShowUI(false);
                     if (SeamothInfo.lastSeamothGearValue != 0f)
                     {
-                        thisSeamoth.forwardForce = forwardForce;
-                        thisSeamoth.backwardForce = backwardForce;
-                        thisSeamoth.sidewardForce = sidewardForce;
-                        thisSeamoth.verticalForce = verticalForce;
-                        SeamothInfo.lastSeamothGearValue = 0f;
+                        SetGear(_seamoth, 0f, 1f, 1f);
                     }
                 }
             }
+        }
+
+        private static void SetGear(SeaMoth _seamoth, float gear, float multip, float direction)
+        {
+            _seamoth.forwardForce = forwardForce + (largeFactor * multip * direction);
+            _seamoth.backwardForce = backwardForce + (smallFactor * multip * direction);
+            _seamoth.sidewardForce = sidewardForce + (largeFactor * multip * direction);
+            _seamoth.verticalForce = verticalForce + (largeFactor * multip * direction);
+            SeamothInfo.lastSeamothGearValue = gear;
         }
     }
 }

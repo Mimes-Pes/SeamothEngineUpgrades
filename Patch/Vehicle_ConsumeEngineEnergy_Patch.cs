@@ -1,15 +1,8 @@
 ﻿using Harmony;
 using UnityEngine;
 
-
-// Main mod.
-namespace SeamothEngineUpgrades  // Name of the mod.
+namespace SeamothEngineUpgrades
 {
-    // ######################################################################
-    // Patch Vehicle class ConsumeEngineEnergy()
-    //
-    // ######################################################################
-
     [HarmonyPatch(typeof(Vehicle))]
     [HarmonyPatch("ConsumeEngineEnergy")]
     internal class Vehicle_ConsumeEngineEnergy_Patch
@@ -48,7 +41,6 @@ namespace SeamothEngineUpgrades  // Name of the mod.
 
             float energyCanProvide = thisEnergyInterface.TotalCanProvide(out int num);
             return thisEnergyMixing.ConsumeEnergy(Mathf.Min(realEnergyCost, energyCanProvide));
-
         }
     }
 }

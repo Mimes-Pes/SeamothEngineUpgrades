@@ -229,7 +229,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6
 --- !u!1 &1594092187560606085
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +453,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <size=20><color=green>100</color>%</size>
+  m_Text: 200<color=yellow>mu</color>
 --- !u!1 &4514726993655461132
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +735,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -9999
   m_TargetDisplay: 0
 --- !u!114 &6395776158581248525
 MonoBehaviour:

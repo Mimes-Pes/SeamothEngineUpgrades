@@ -5,17 +5,12 @@ using SMLHelper.V2.Utility;
 
 namespace SeamothEngineUpgrades
 {
-    // ######################################################################
-    // Patch Seamoth class Update() - implement gear and player prompts changes
-    //
-    // ######################################################################
-
-    [HarmonyPatch(typeof(SeaMoth))]  // Patch for the SeaMoth class.
-    [HarmonyPatch("Update")]        // The SeaMoth class's Update method.
+    [HarmonyPatch(typeof(SeaMoth))]
+    [HarmonyPatch("Update")]
     internal class SeaMoth_Update_Patch
     {
         // Change vanilla Seamoth operation.
-        [HarmonyPostfix]      // Harmony postfix
+        [HarmonyPostfix]
         public static void Postfix(SeaMoth __instance)
         {
             if (__instance.GetPilotingMode())
@@ -67,7 +62,7 @@ namespace SeamothEngineUpgrades
                     if (KeyCodeUtils.GetKeyDown(Config.GearUpKeybindValue))
                     {
                         var gearVal = Config.SeamothGearValue + 1f;
-                        if (gearVal > 5f) return;
+                        if (gearVal > 6f) return;
                         Config.SeamothGearValue = gearVal;
                         PlayerPrefs.SetFloat("SeamothGearValueSlider", gearVal);
                     }
@@ -90,24 +85,26 @@ namespace SeamothEngineUpgrades
                             StringBuilder stringBuilder = new StringBuilder();
                             string thisText1 = Traverse.Create(HandReticle.main).Field("useText1").GetValue<string>();
                             string thisText2 = Traverse.Create(HandReticle.main).Field("useText2").GetValue<string>();
-
+                            
+                            string text = "";
+                            text += $"Gear up (<color=#ADF8FFFF>{Config.GearUpKeybindValue}</color>)  down (<color=#ADF8FFFF>{Config.GearDownKeybindValue}</color>) \n";
                             // prompt for gear changes
-                            stringBuilder.Append("Gear up ");
-                            stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.GearUpKeybindValue.ToString());
-                            stringBuilder.Append(" down ");
-                            stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.GearDownKeybindValue.ToString());
-                            stringBuilder.Append('\n');
-
+                            //stringBuilder.Append("Gear up ");
+                            //stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.GearUpKeybindValue.ToString());
+                            //stringBuilder.Append(" down ");
+                            //stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.GearDownKeybindValue.ToString());
+                            //stringBuilder.Append('\n');
+                            text += $"Cycle health (<color=#ADF8FFFF>{Config.HealthKeybindValue}</color>)  power (<color=#ADF8FFFF>{Config.PowerKeybindValue}</color>) \n";
                             //prompt for health and power info cycle
-                            stringBuilder.Append("Cycle health ");
-                            stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.HealthKeybindValue.ToString());
-                            stringBuilder.Append(" power ");
-                            stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.PowerKeybindValue.ToString());
-                            stringBuilder.Append('\n');
-
-                            stringBuilder.Append(thisText1);
-                            string result = stringBuilder.ToString();
-                            HandReticle.main.SetUseTextRaw(result, thisText2);
+                            //stringBuilder.Append("Cycle health ");
+                            //stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.HealthKeybindValue.ToString());
+                            //stringBuilder.Append(" power ");
+                            //stringBuilder.AppendFormat("(<color=#ADF8FFFF>{0}</color>)", Config.PowerKeybindValue.ToString());
+                            //stringBuilder.Append('\n');
+                            //stringBuilder.Append(thisText1);
+                            //string result = stringBuilder.ToString();
+                            text += thisText1;
+                            HandReticle.main.SetUseTextRaw(text, thisText2);
                         }
                     }
                 }

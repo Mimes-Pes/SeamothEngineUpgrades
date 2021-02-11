@@ -7,53 +7,41 @@ using UnityEngine;
 // Main mod.
 namespace SeamothEngineUpgrades  // Name of the mod.
 {
-    // ######################################################################
-    // Patch uGUI_SeamothHUD class Update() - all display health, energy and temperature changes
-    //
-    // ######################################################################
-
-    [HarmonyPatch(typeof(uGUI_SeamothHUD))]  // Patch for the uGUI_SeamothHUD class.
-    [HarmonyPatch("Update")]        // The uGUI_SeamothHUD class's Update method.
+    [HarmonyPatch(typeof(uGUI_SeamothHUD))]
+    [HarmonyPatch("Update")]
     internal class uGUI_SeamothHUD_Update_Patch
     {
-        const string colorWhite = "white";
-        const string colorYellow = "yellow";
-        const string colorRed = "red";
         static string Font => Config.VehicleFontSizeSliderValue.ToString();
         static string Size => (Config.VehicleFontSizeSliderValue / 1.5f).ToString();
 
         // Change vanilla uGUI_SeamothHUD operation.
-        [HarmonyPostfix]      // Harmony postfix
+        [HarmonyPostfix]
         public static void Postfix(uGUI_SeamothHUD __instance)
         {
 
             Player main = Player.main;
             if (main != null)
             {
-                Vehicle thisSeamoth = (SeaMoth)main.GetVehicle();
+                SeaMoth _seamoth = (SeaMoth)main.GetVehicle();
                 // Info Display
-                if (thisSeamoth != null)
+                if (_seamoth != null)
                 {
-                    bool upgradeLoaded = thisSeamoth.modules.GetCount(Modules.SeamothEngineUpgradesModule.TechTypeID) > 0;
-                    SetHealthDisplay(thisSeamoth, __instance, upgradeLoaded);
-                    SetPowerDisplay(thisSeamoth, __instance, upgradeLoaded);
-                    SetTemperatureDisplay(thisSeamoth, __instance, upgradeLoaded);
-
-                    SeamothEngineUiManager.ShowUI(upgradeLoaded);
+                    SetHealthDisplay(_seamoth, __instance);
+                    SetPowerDisplay(_seamoth, __instance);
+                    SetTemperatureDisplay(_seamoth, __instance);
                 }
             }
         }
 
-        private static void SetHealthDisplay(Vehicle seaMoth, uGUI_SeamothHUD __instance, bool upgradeLoaded) 
+        private static void SetHealthDisplay(Vehicle seaMoth, uGUI_SeamothHUD __instance) 
         {
             LiveMixin thisLiveMixin = seaMoth.GetComponent<LiveMixin>();
             float healthStatus = thisLiveMixin.GetHealthFraction();
 
             // Run only if the upgrade is loaded
-            if (upgradeLoaded)
+            if (SeamothEngineUiManager.IsUIVisible)
             {
-                var textJoin = string.Empty;
-
+                string textJoin;
                 switch (Config.MarchThroughHealthValue)
                 {
                     case 1f:
@@ -69,7 +57,6 @@ namespace SeamothEngineUpgrades  // Name of the mod.
                         textJoin = $"<size={Font}><color={Config.GetHealtColor(healthStatus)}>{healtDefault}%</color></size>";
                         break;
                 }
-
                 //__instance.textHealth.text = textJoin;
                 SeamothEngineUiManager.SetLifeText(textJoin);
             }
@@ -81,7 +68,7 @@ namespace SeamothEngineUpgrades  // Name of the mod.
             }
         }
 
-        private static void SetPowerDisplay(Vehicle seaMoth, uGUI_SeamothHUD __instance, bool upgradeLoaded)
+        private static void SetPowerDisplay(Vehicle seaMoth, uGUI_SeamothHUD __instance)
         {
             EnergyMixin thisEnergyMixing = seaMoth.GetComponent<EnergyMixin>();
             EnergyInterface thisEnergyInterface = thisEnergyMixing.GetComponent<EnergyInterface>();
@@ -89,10 +76,9 @@ namespace SeamothEngineUpgrades  // Name of the mod.
             float capacity;
             thisEnergyInterface.GetValues(out charge, out capacity);
 
-            // Run only if the upgrade is loaded
-            if (upgradeLoaded)
+            if (SeamothEngineUiManager.IsUIVisible)
             {
-                var textJoin = string.Empty;
+                string textJoin;
                 switch (Config.MarchThroughPowerValue)
                 {
                     case 1f:// units(mu)
@@ -117,16 +103,15 @@ namespace SeamothEngineUpgrades  // Name of the mod.
             }
         }
 
-        private static void SetTemperatureDisplay(Vehicle seamoth, uGUI_SeamothHUD __instance, bool upgradeLoaded) 
+        private static void SetTemperatureDisplay(Vehicle seamoth, uGUI_SeamothHUD __instance) 
         {
             var waterTemp = Traverse.Create(__instance).Field("lastTemperature").GetValue<int>();
-            var font = Config.VehicleFontSizeSliderValue.ToString();
-            var size = (Config.VehicleFontSizeSliderValue / 1.5).ToString();
 
-            if (upgradeLoaded)
+            if (SeamothEngineUiManager.IsUIVisible)
             {
+                string textJoin;
                 // Set warning colours of water temperature as per mod options
-                var textJoin = $"<size={font}><color={Config.GetTempColor(waterTemp)}>{waterTemp}</color></size>";
+                textJoin = $"<size={Font}><color={Config.GetTempColor(waterTemp)}>{waterTemp}</color></size>";
                 __instance.textTemperature.text = textJoin;
             }
             else // display as per vanilla game

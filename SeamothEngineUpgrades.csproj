@@ -86,7 +86,6 @@
     <Compile Include="Object\GearInfo.cs" />
     <Compile Include="MainPatcher.cs" />
     <Compile Include="Config\Options.cs" />
-    <Compile Include="Patch\Player_Update_Patch.cs" />
     <Compile Include="Object\SeamothEngineUpgrades.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Object\SeamothInfo.cs" />
@@ -136,6 +135,8 @@
     <Content Include="SpriteExport\Sprite\Work\SeamothEngineUpgradesModule.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\seamothengineupgradesasset" />
+    <None Include="Assets\seamothengineupgradesasset.manifest" />
     <None Include="mod.json" />
     <None Include="README.md" />
   </ItemGroup>

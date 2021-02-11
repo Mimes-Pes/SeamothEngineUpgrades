@@ -15,8 +15,15 @@ namespace SeamothEngineUpgrades.InGame
         private static Text txtLife;
         private static Text txtEnergy;
 
+        public static bool IsUIVisible;
         //private static Button btnLife;
         //private static Button btnEnergy;
+
+        void Awake()
+        {
+            //var parent = GameObject.Find("HUD").transform;
+            //this.transform.SetParent(parent);
+        }
 
         void Start()
         {
@@ -34,6 +41,31 @@ namespace SeamothEngineUpgrades.InGame
             InfoUI.SetActive(false);
         }
 
+        public void Update()
+        {
+            if (Player.main == null) return;
+            var _seamoth = (SeaMoth)Player.main.GetVehicle();
+            if(_seamoth != null)
+            {
+                bool upgradeLoaded = _seamoth.modules.GetCount(Modules.SeamothEngineUpgradesModule.TechTypeID) > 0;
+                bool playerPiloting = Player.main.GetMode() == Player.Mode.LockedPiloting;
+                var isPDAOpened = Player.main.GetPDA().isInUse;
+                var showUI = upgradeLoaded && playerPiloting && !isPDAOpened;
+                ShowUI(showUI);
+            }
+            else
+            {
+                ShowUI(false);
+            }
+
+            // Set Gear
+            if (SeamothEngineUiManager.IsUIVisible)
+            {
+                var gearColor = Config.SeamothGearValue <= 4 ? nameof(Color.white) : Config.SeamothGearValue == 5 ? nameof(Color.yellow) : nameof(Color.red);
+                SeamothEngineUiManager.SetGearText(Config.SeamothGearValue.ToString(), gearColor);
+            }
+        }
+
         //private void SwitchEnergy()
         //{
         //}
@@ -45,6 +77,7 @@ namespace SeamothEngineUpgrades.InGame
         public static void ShowUI(bool value)
         {
             InfoUI.SetActive(value);
+            IsUIVisible = value;
         }
 
         public static void SetLifeText(string value, string color = nameof(Color.white)) => SetColoredText(txtLife, value, color);
